@@ -12,7 +12,7 @@ class UserWeight extends Model
     protected $fillable = [
         'user_id',
         'weight_kg',
-        'date'
+        'date',
     ];
 
     public function user()

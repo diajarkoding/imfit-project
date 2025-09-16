@@ -12,7 +12,7 @@ class Set extends Model
     protected $fillable = [
         'session_exercise_id',
         'weight',
-        'reps'
+        'reps',
     ];
 
     public function sessionExercise()

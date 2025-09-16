@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
 class Exercise extends Model
 {
     use HasFactory;
@@ -14,7 +13,7 @@ class Exercise extends Model
         'name',
         'description',
         'target_muscle',
-        'created_by_admin_id'
+        'created_by_admin_id',
     ];
 
     public function admin()

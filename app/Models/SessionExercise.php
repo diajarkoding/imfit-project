@@ -12,7 +12,7 @@ class SessionExercise extends Model
     protected $fillable = [
         'session_id',
         'exercise_id',
-        'order'
+        'order',
     ];
 
     public function session()
