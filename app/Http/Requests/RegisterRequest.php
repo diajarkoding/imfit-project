@@ -21,7 +21,7 @@ class RegisterRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'date_of_birth' => 'nullable|date',
-            'profile_picture' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
+            'profile_picture_url' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
 
         ];
     }

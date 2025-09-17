@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sets', function (Blueprint $table) {
+        Schema::create('session_sets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('session_exercise_id')->constrained('session_exercises')->onDelete('cascade');
             $table->decimal('weight', 8, 2);
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sets');
+        Schema::dropIfExists('session_sets');
     }
 };

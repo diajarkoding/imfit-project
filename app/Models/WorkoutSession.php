@@ -22,4 +22,9 @@ class WorkoutSession extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function sessionExercises()
+    {
+        return $this->hasMany(SessionExercise::class, 'workout_session_id');
+    }
 }

@@ -10,18 +10,23 @@ class SessionExercise extends Model
     use HasFactory;
 
     protected $fillable = [
-        'session_id',
+        'workout_session_id',  // ✅ perbaikan nama kolom
         'exercise_id',
         'order',
     ];
 
-    public function session()
+    public function workoutSession()
     {
-        return $this->belongsTo(WorkoutSession::class);
+        return $this->belongsTo(WorkoutSession::class, 'workout_session_id');
     }
 
     public function exercise()
     {
         return $this->belongsTo(Exercise::class);
+    }
+
+    public function sets()
+    {
+        return $this->hasMany(SessionSet::class, 'session_exercise_id');
     }
 }

@@ -5,17 +5,40 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ExerciseRequest;
 use App\Models\Exercise;
 use App\Traits\ApiResponse;
+use Illuminate\Http\Request; // Tambahkan ini
 use Illuminate\Support\Facades\Auth;
 
 class ExerciseController extends Controller
 {
     use ApiResponse;
 
-    public function index()
+    /**
+     * Mengambil daftar latihan dengan paginasi dan fitur pencarian.
+     * Field yang ditampilkan terbatas untuk efisiensi.
+     */
+    public function index(Request $request)
     {
-        $exercises = Exercise::all();
+        $query = Exercise::select('id', 'name', 'target_muscle');
 
-        return $this->success($exercises);
+        // Fitur pencarian
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->where('name', 'like', "%{$searchTerm}%")
+                  ->orWhere('target_muscle', 'like', "%{$searchTerm}%");
+        }
+
+        // Paginasi, 10 item per halaman secara default
+        $exercises = $query->paginate(10);
+
+        return $this->success($exercises, 'Daftar latihan berhasil diambil.');
+    }
+
+    /**
+     * Mengambil detail lengkap dari satu latihan berdasarkan ID.
+     */
+    public function show(Exercise $exercise)
+    {
+        return $this->success($exercise, 'Detail latihan berhasil diambil.');
     }
 
     public function store(ExerciseRequest $request)

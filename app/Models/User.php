@@ -51,6 +51,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function workoutSessions()
+    {
+        return $this->hasMany(WorkoutSession::class);
+    }
+
     /**
      * Get the user's weight history.
      */

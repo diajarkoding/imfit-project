@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Set extends Model
+class SessionSet extends Model
 {
     use HasFactory;
 
@@ -17,6 +17,6 @@ class Set extends Model
 
     public function sessionExercise()
     {
-        return $this->belongsTo(SessionExercise::class);
+        return $this->belongsTo(SessionExercise::class, 'session_exercise_id');
     }
 }
