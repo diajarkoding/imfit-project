@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -20,7 +19,6 @@ class AuthController extends Controller
         if ($request->hasFile('profile_picture_url')) {
             $profilePicturePath = $request->file('profile_picture_url')->store('profile_pictures', 'public');
         }
-
 
         $user = User::create([
             'fullname' => $request->fullname,
@@ -34,16 +32,17 @@ class AuthController extends Controller
         return $this->success(true, 'Registrasi berhasil. Silakan login.', 201);
     }
 
-    public function login(LoginRequest $request)
+    public function login(Request $request)
     {
         $login = $request->input('login');
+        $password = $request->input('password');
 
         $user = User::where('email', $login)
             ->orWhere('username', $login)
             ->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            return $this->error('Kredensial tidak valid.', null, 401);
+        if (! $user || ! Hash::check($password, $user->password)) {
+            return $this->error('Gagal Login', 'Nama Pengguna tidak ditemukan/Email belum di konfirmasi', 401);
         }
 
         // Hapus token lama
@@ -57,7 +56,6 @@ class AuthController extends Controller
         ], 'Login berhasil.');
     }
 
-
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
@@ -65,7 +63,7 @@ class AuthController extends Controller
         return $this->success(true, 'Berhasil logout.');
     }
 
-     public function getProfile()
+    public function getProfile()
     {
         $user = Auth::user();
 
@@ -76,7 +74,7 @@ class AuthController extends Controller
             'date_of_birth' => $user->date_of_birth,
             'profile_picture_url' => $user->profile_picture_url,
         ];
-        
+
         return $this->success($profileData, 'Data profil berhasil diambil.');
     }
 }

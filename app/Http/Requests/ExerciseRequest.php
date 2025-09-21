@@ -35,8 +35,8 @@ class ExerciseRequest extends FormRequest
         throw new HttpResponseException(
             response()->json([
                 'status' => 'error',
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors(),
+                'error' => 'Gagal Menambah Latihan',
+                'message' => $validator->errors(),
             ], 422)
         );
     }

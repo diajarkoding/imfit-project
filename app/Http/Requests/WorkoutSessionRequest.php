@@ -33,8 +33,8 @@ class WorkoutSessionRequest extends FormRequest
         throw new HttpResponseException(
             response()->json([
                 'status' => 'error',
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors(),
+                'error' => 'Gagal Menambah Sesi Latihan',
+                'message' => $validator->errors(),
             ], 422)
         );
     }

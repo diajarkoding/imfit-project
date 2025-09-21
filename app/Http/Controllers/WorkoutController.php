@@ -51,7 +51,8 @@ class WorkoutController extends Controller
             return $this->success(null, 'Sesi latihan berhasil disimpan.', 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return $this->error('Gagal menyimpan sesi latihan.', ['exception' => $e->getMessage()], 500);
+
+            return $this->error('Sesi Latihan', 'Gagal menyimpan sesi latihan.', 500);
         }
     }
 
@@ -85,14 +86,14 @@ class WorkoutController extends Controller
         $session = $workoutSession->load([
             'sessionExercises' => function ($query) {
                 $query->select('id', 'workout_session_id', 'exercise_id', 'order')
-                      ->orderBy('order');
+                    ->orderBy('order');
             },
             'sessionExercises.exercise' => function ($query) {
                 $query->select('id', 'name', 'target_muscle', 'description');
             },
             'sessionExercises.sets' => function ($query) {
                 $query->select('id', 'session_exercise_id', 'weight', 'reps');
-            }
+            },
         ]);
 
         return $this->success($session, 'Detail sesi latihan berhasil diambil.');

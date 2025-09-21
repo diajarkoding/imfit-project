@@ -24,7 +24,7 @@ class ExerciseController extends Controller
         if ($request->has('search')) {
             $searchTerm = $request->input('search');
             $query->where('name', 'like', "%{$searchTerm}%")
-                  ->orWhere('target_muscle', 'like', "%{$searchTerm}%");
+                ->orWhere('target_muscle', 'like', "%{$searchTerm}%");
         }
 
         // Paginasi, 10 item per halaman secara default
@@ -60,7 +60,7 @@ class ExerciseController extends Controller
     public function destroy(Exercise $exercise)
     {
         if (Auth::user()->id !== $exercise->created_by_admin_id) {
-            return $this->error('Akses ditolak. Anda hanya bisa menghapus latihan yang Anda buat.', null, 403);
+            return $this->error('Menghapus latihan', 'Akses ditolak. Anda hanya bisa menghapus latihan yang Anda buat.', 403);
         }
         $exercise->delete();
 

@@ -26,8 +26,8 @@ class UserWeightRequest extends FormRequest
         throw new HttpResponseException(
             response()->json([
                 'status' => 'error',
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors(),
+                'error' => 'Gagal Menambah Berat Badan',
+                'message' => $validator->errors(),
             ], 422)
         );
     }

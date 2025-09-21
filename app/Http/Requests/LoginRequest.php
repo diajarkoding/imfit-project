@@ -23,11 +23,20 @@ class LoginRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
+
+        $errors = $validator->errors();
+        $errorTitle = 'Gagal Login';
+        $message = 'Validasi gagal';
+
+        if ($errors->has('password')) {
+            $message = 'Format kata sandi tidak valid.';
+        }
+
         throw new HttpResponseException(
             response()->json([
                 'status' => 'error',
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors(),
+                'error' => $errorTitle,
+                'message' => $message,
             ], 422)
         );
     }
