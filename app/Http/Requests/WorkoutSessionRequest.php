@@ -8,11 +8,23 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class WorkoutSessionRequest extends FormRequest
 {
+    /**
+     * Menentukan apakah pengguna diizinkan untuk membuat permintaan ini.
+     * Semua pengguna terautentikasi diizinkan.
+     *
+     * @return bool
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Mendapatkan aturan validasi yang berlaku untuk permintaan sesi latihan.
+     * Memvalidasi struktur data latihan dan set yang kompleks.
+     *
+     * @return array
+     */
     public function rules(): array
     {
         return [
@@ -28,6 +40,13 @@ class WorkoutSessionRequest extends FormRequest
         ];
     }
 
+    /**
+     * Menangani kegagalan validasi dengan mengembalikan respons JSON.
+     *
+     * @param Validator $validator Validator yang berisi error validasi
+     * @return void
+     * @throws HttpResponseException
+     */
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(

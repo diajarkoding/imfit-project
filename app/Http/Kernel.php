@@ -7,9 +7,9 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 class Kernel extends HttpKernel
 {
     /**
-     * The application's global HTTP middleware stack.
+     * Tumpukan middleware HTTP global aplikasi.
      *
-     * These middleware are run during every request to your application.
+     * Middleware ini dijalankan selama setiap permintaan ke aplikasi Anda.
      *
      * @var array<int, class-string|string>
      */
@@ -21,7 +21,7 @@ class Kernel extends HttpKernel
     ];
 
     /**
-     * The application's route middleware groups.
+     * Grup middleware rute aplikasi.
      *
      * @var array<string, array<int, class-string|string>>
      */
@@ -34,16 +34,16 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            // throttle bawaan Laravel (60 request per menit untuk group "api")
+            // Pembatasan kecepatan bawaan Laravel (60 permintaan per menit untuk grup "api")
             \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
 
     /**
-     * The application's route middleware.
+     * Middleware rute aplikasi.
      *
-     * These middleware may be assigned to groups or used individually.
+     * Middleware ini dapat ditugaskan ke grup atau digunakan secara individual.
      *
      * @var array<string, class-string|string>
      */
@@ -54,7 +54,7 @@ class Kernel extends HttpKernel
         'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'   => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        // Custom middleware Anda
+        // Middleware kustom Anda
         'is_admin'   => \App\Http\Middleware\IsAdminMiddleware::class,
     ];
 }

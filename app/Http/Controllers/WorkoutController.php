@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\WorkoutSessionRequest;
 use App\Models\WorkoutSession;
 use App\Traits\ApiResponse;
-use Illuminate\Http\Request; // Import Request
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +13,12 @@ class WorkoutController extends Controller
 {
     use ApiResponse;
 
+    /**
+     * Menyimpan sesi latihan baru beserta detail latihan dan set.
+     *
+     * @param WorkoutSessionRequest $request Data permintaan yang divalidasi untuk sesi latihan
+     * @return \Illuminate\Http\JsonResponse Respons JSON dengan pesan hasil penyimpanan
+     */
     public function store(WorkoutSessionRequest $request)
     {
         $totalVolume = 0;
@@ -59,6 +65,9 @@ class WorkoutController extends Controller
     /**
      * Mengambil daftar riwayat latihan dengan paginasi dan pencarian.
      * Hanya memuat field yang dibutuhkan untuk efisiensi.
+     *
+     * @param Request $request Data permintaan yang berisi parameter pencarian (opsional)
+     * @return \Illuminate\Http\JsonResponse Respons JSON dengan riwayat latihan
      */
     public function getHistory(Request $request)
     {
@@ -80,6 +89,9 @@ class WorkoutController extends Controller
 
     /**
      * Mengambil detail lengkap satu sesi latihan berdasarkan ID.
+     *
+     * @param WorkoutSession $workoutSession Model sesi latihan yang akan ditampilkan
+     * @return \Illuminate\Http\JsonResponse Respons JSON dengan detail sesi latihan
      */
     public function show(WorkoutSession $workoutSession)
     {

@@ -11,6 +11,12 @@ class ProgressController extends Controller
 {
     use ApiResponse;
 
+    /**
+     * Menyimpan data berat badan pengguna.
+     *
+     * @param UserWeightRequest $request Data permintaan yang divalidasi untuk berat badan
+     * @return \Illuminate\Http\JsonResponse Respons JSON dengan data berat badan yang disimpan
+     */
     public function storeWeight(UserWeightRequest $request)
     {
         $userWeight = UserWeight::create([
@@ -22,6 +28,11 @@ class ProgressController extends Controller
         return $this->success($userWeight, 'Berat badan berhasil disimpan.', 201);
     }
 
+    /**
+     * Mengambil riwayat berat badan pengguna yang diurutkan berdasarkan tanggal.
+     *
+     * @return \Illuminate\Http\JsonResponse Respons JSON dengan riwayat berat badan
+     */
     public function getWeightHistory()
     {
         $history = Auth::user()->userWeights()->orderBy('date')->get();

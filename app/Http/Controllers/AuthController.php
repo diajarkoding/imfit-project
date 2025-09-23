@@ -13,6 +13,12 @@ class AuthController extends Controller
 {
     use ApiResponse;
 
+    /**
+     * Mendaftarkan pengguna baru ke dalam sistem.
+     *
+     * @param RegisterRequest $request Data permintaan yang divalidasi untuk pendaftaran
+     * @return \Illuminate\Http\JsonResponse Respons JSON dengan data pengguna yang baru dibuat
+     */
     public function register(RegisterRequest $request)
     {
         $profilePicturePath = null;
@@ -32,6 +38,12 @@ class AuthController extends Controller
         return $this->success(true, 'Registrasi berhasil. Silakan login.', 201);
     }
 
+    /**
+     * Melakukan proses login pengguna ke dalam sistem.
+     *
+     * @param Request $request Data permintaan yang berisi informasi login dan password
+     * @return \Illuminate\Http\JsonResponse Respons JSON dengan token autentikasi atau pesan error
+     */
     public function login(Request $request)
     {
         $login = $request->input('login');
@@ -56,6 +68,12 @@ class AuthController extends Controller
         ], 'Login berhasil.');
     }
 
+    /**
+     * Melakukan proses logout pengguna dari sistem.
+     *
+     * @param Request $request Data permintaan autentikasi pengguna
+     * @return \Illuminate\Http\JsonResponse Respons JSON dengan pesan berhasil logout
+     */
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
@@ -63,6 +81,11 @@ class AuthController extends Controller
         return $this->success(true, 'Berhasil logout.');
     }
 
+    /**
+     * Mengambil data profil pengguna yang sedang login.
+     *
+     * @return \Illuminate\Http\JsonResponse Respons JSON dengan data profil pengguna
+     */
     public function getProfile()
     {
         $user = Auth::user();
