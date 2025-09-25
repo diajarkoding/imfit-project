@@ -5,6 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property int $workout_session_id
+ * @property int $exercise_id
+ * @property int $order
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Exercise $exercise
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SessionSet> $sets
+ * @property-read int|null $sets_count
+ * @property-read \App\Models\WorkoutSession $workoutSession
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SessionExercise newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SessionExercise newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SessionExercise query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SessionExercise whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SessionExercise whereExerciseId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SessionExercise whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SessionExercise whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SessionExercise whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SessionExercise whereWorkoutSessionId($value)
+ * @mixin \Eloquent
+ */
 class SessionExercise extends Model
 {
     use HasFactory;
