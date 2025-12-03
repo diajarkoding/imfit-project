@@ -1,61 +1,160 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Dokumentasi Proyek IMFIT
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+IMFIT adalah aplikasi backend berbasis Laravel untuk pelacakan latihan (workout) dan perkembangan fisik pengguna. Aplikasi ini menyediakan API untuk mengelola latihan, mencatat sesi latihan, dan melacak berat badan pengguna.
 
-## About Laravel
+## 🛠 Teknologi yang Digunakan
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   **Framework Backend:** Laravel 12.x
+-   **Bahasa Pemrograman:** PHP 8.2+
+-   **Database:** MySQL
+-   **Otentikasi:** Laravel Sanctum
+-   **Frontend Tooling:** Vite + Tailwind CSS 4.0 (untuk sisi client/web jika ada)
+-   **Testing:** Pest PHP
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Panduan Instalasi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini di lingkungan lokal Anda:
 
-## Learning Laravel
+### Prasyarat
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   PHP >= 8.2
+-   Composer
+-   MySQL
+-   Node.js & NPM
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Langkah-langkah
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. **Clone Repository**
 
-## Laravel Sponsors
+    ```bash
+    git clone <repository-url>
+    cd imfit-project
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. **Install Dependensi PHP**
 
-### Premium Partners
+    ```bash
+    composer install
+    ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+3. **Install Dependensi Node.js**
 
-## Contributing
+    ```bash
+    npm install
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Konfigurasi Environment**
+   Salin file `.env.example` menjadi `.env` dan sesuaikan konfigurasi database Anda.
 
-## Code of Conduct
+    ```bash
+    cp .env.example .env
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    Buka file `.env` dan sesuaikan bagian berikut:
 
-## Security Vulnerabilities
+    ```ini
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=imfit_project
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. **Generate App Key**
 
-## License
+    ```bash
+    php artisan key:generate
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+6. **Jalankan Migrasi Database**
+   Pastikan database `imfit_project` sudah dibuat di MySQL, lalu jalankan:
+
+    ```bash
+    php artisan migrate
+    ```
+
+7. **Jalankan Server**
+   Untuk backend Laravel:
+    ```bash
+    php artisan serve
+    ```
+    Untuk aset frontend (jika diperlukan):
+    ```bash
+    npm run dev
+    ```
+
+## 📂 Struktur Database
+
+Aplikasi ini menggunakan skema database relasional sebagai berikut:
+
+-   **users**: Menyimpan data pengguna (nama, email, password, role admin, dll).
+-   **exercises**: Daftar gerakan latihan (nama, deskripsi, otot target).
+-   **workout_sessions**: Mencatat sesi latihan pengguna (waktu mulai/selesai, total volume).
+-   **session_exercises**: Pivot table antara sesi dan latihan, mencatat urutan latihan dalam sesi.
+-   **session_sets**: Detail set untuk setiap latihan (berat beban, repetisi).
+-   **user_weights**: Riwayat berat badan pengguna.
+
+## 🔌 Dokumentasi API
+
+Untuk melihat detail lengkap mengenai Request, Response, dan Contoh Penggunaan API, silakan kunjungi file berikut:
+
+👉 **[Dokumentasi Lengkap API (documentation_api.md)](./documentation_api.md)**
+
+### Ringkasan Endpoint
+
+Semua endpoint API menggunakan prefix `/api`.
+
+### Otentikasi (Public)
+
+| Method | Endpoint    | Deskripsi                         |
+| ------ | ----------- | --------------------------------- |
+| POST   | `/register` | Mendaftar pengguna baru           |
+| POST   | `/login`    | Masuk dan mendapatkan token akses |
+
+### User & Profil (Protected)
+
+Memerlukan Header: `Authorization: Bearer <token>`
+
+| Method | Endpoint   | Deskripsi                                   |
+| ------ | ---------- | ------------------------------------------- |
+| POST   | `/logout`  | Keluar dan menghapus token                  |
+| GET    | `/profile` | Mendapatkan informasi profil pengguna login |
+
+### Latihan (Exercises)
+
+| Method | Endpoint          | Deskripsi                       |
+| ------ | ----------------- | ------------------------------- |
+| GET    | `/exercises`      | Melihat daftar semua latihan    |
+| GET    | `/exercises/{id}` | Melihat detail latihan tertentu |
+
+### Sesi Latihan (Workouts)
+
+| Method | Endpoint            | Deskripsi                                |
+| ------ | ------------------- | ---------------------------------------- |
+| POST   | `/workouts`         | Mencatat sesi latihan baru (beserta set) |
+| GET    | `/workouts/history` | Melihat riwayat latihan pengguna         |
+| GET    | `/workouts/{id}`    | Melihat detail sesi latihan tertentu     |
+
+### Progress (Berat Badan)
+
+| Method | Endpoint           | Deskripsi                          |
+| ------ | ------------------ | ---------------------------------- |
+| POST   | `/weights`         | Mencatat berat badan baru          |
+| GET    | `/weights/history` | Melihat grafik/riwayat berat badan |
+
+### Admin Area
+
+Hanya dapat diakses oleh user dengan `is_admin = 1`.
+
+| Method | Endpoint          | Deskripsi                       |
+| ------ | ----------------- | ------------------------------- |
+| POST   | `/exercises`      | Membuat latihan baru            |
+| PUT    | `/exercises/{id}` | Mengupdate data latihan         |
+| DELETE | `/exercises/{id}` | Menghapus latihan               |
+| GET    | `/admin/users`    | Melihat daftar seluruh pengguna |
+
+## 📝 Catatan Tambahan
+
+-   **Role Admin**: User biasa memiliki `is_admin = 0`. Untuk membuat user menjadi admin, ubah nilai kolom `is_admin` menjadi `1` secara manual di database atau melalui seeder (jika tersedia).
+-   **Format Request**: API menerima input dalam format JSON.
