@@ -8,6 +8,7 @@ IMFIT adalah aplikasi backend berbasis Laravel untuk pelacakan latihan (workout)
 -   **Bahasa Pemrograman:** PHP 8.2+
 -   **Database:** MySQL
 -   **Otentikasi:** Laravel Sanctum
+-   **Admin Panel:** Filament 3.x
 -   **Frontend Tooling:** Vite + Tailwind CSS 4.0 (untuk sisi client/web jika ada)
 -   **Testing:** Pest PHP
 
@@ -153,6 +154,37 @@ Hanya dapat diakses oleh user dengan `is_admin = 1`.
 | PUT    | `/exercises/{id}` | Mengupdate data latihan         |
 | DELETE | `/exercises/{id}` | Menghapus latihan               |
 | GET    | `/admin/users`    | Melihat daftar seluruh pengguna |
+
+## 🖥 Admin Dashboard (Filament)
+
+Aplikasi ini dilengkapi dengan Admin Dashboard berbasis **Filament 3.x** untuk mengelola data melalui antarmuka web.
+
+### Akses Admin Panel
+
+-   **URL:** `/admin`
+-   **Login:** Gunakan akun user dengan `is_admin = 1`
+
+### Fitur Admin Panel
+
+| Resource  | Deskripsi                                           |
+| --------- | --------------------------------------------------- |
+| Users     | Kelola data pengguna (lihat, buat, edit, hapus)     |
+| Exercises | Kelola data latihan (lihat, buat, edit, hapus)      |
+
+### Menambah Admin User
+
+Untuk membuat user menjadi admin dan dapat mengakses panel:
+
+```bash
+# Via Tinker
+php artisan tinker
+>>> User::where('email', 'admin@example.com')->update(['is_admin' => 1]);
+```
+
+Atau langsung update di database:
+```sql
+UPDATE users SET is_admin = 1 WHERE email = 'admin@example.com';
+```
 
 ## 📝 Catatan Tambahan
 
